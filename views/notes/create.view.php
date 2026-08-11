@@ -8,9 +8,8 @@
             <a class="text-blue-500 hover:underline" href="/notes">
                 ← Go back
             </a>
-        </p>
         <div class="max-w-2xl rounded-md bg-white p-6 shadow-md">
-            <form method="POST" action="">
+            <form method="POST" action="/notes">
                 <div class="grid grid-cols-1 gap-y-6">
                     <div>
                         <label for="body" class="block text-sm font-medium text-gray-900">
