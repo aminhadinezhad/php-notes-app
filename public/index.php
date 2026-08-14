@@ -2,7 +2,6 @@
 
 const BASE_PATH = __DIR__ . '/../';
 
-
 require BASE_PATH . 'Core/functions.php'; // NOTE: از اینجا به بعد functions.php لود شده و base_path() که داخلش هست قابل استفاده میشه
 
 spl_autoload_register(function ($class) {
