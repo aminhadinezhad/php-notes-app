@@ -8,8 +8,10 @@
             <a class="text-blue-500 hover:underline" href="/notes">
                 ← Go back
             </a>
+        </p>
         <div class="max-w-2xl rounded-md bg-white p-6 shadow-md">
             <form method="POST" action="/notes">
+
                 <div class="grid grid-cols-1 gap-y-6">
                     <div>
                         <label for="body" class="block text-sm font-medium text-gray-900">
@@ -28,7 +30,8 @@
                         <?php endif ?>
                     </div>
                 </div>
-                <div class="mt-6">
+
+                <div class="mt-6 flex justify-end">
                     <button
                         type="submit"
                         class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500 cursor-pointer">
