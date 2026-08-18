@@ -2,6 +2,10 @@
 
 namespace Core;
 
+use Core\Middleware\Guest;
+use Core\Middleware\Auth;
+use Core\Middleware\Middleware;
+
 class Router
 {
     protected $routes = [];
@@ -47,13 +51,25 @@ class Router
     {
         $this->routes[array_key_last($this->routes)]['middleware'] = $key;
 
-        dd($this->routes);
+        return $this;
     }
 
     public function route($uri, $method)
     {
         foreach ($this->routes as $route) {
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
+                Middleware::resolve($route['middleware']);
+
+                // if ($route['middleware'] === 'guest') {
+                //     // (new Guest)->handle(); // NOTE: اگر public static رو از function handle() حذف کنی
+                //     Guest::handle();
+                // }
+
+                // if ($route['middleware'] === 'auth') {
+                //     // (new Auth)->handle();
+                //     Auth::handle();
+                // }
+
                 require base_path($route['controller']);
                 return;
             }

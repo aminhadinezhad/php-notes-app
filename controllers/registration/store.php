@@ -28,20 +28,18 @@ $user = $db->query("SELECT * FROM users WHERE email = :email", [
 ])->find();
 
 if ($user) {
-    header('location: /');
-    exit();
+    $errors['email'] = 'There is a user with that email address!';
+
+    return view("registration/create.view.php", [
+        'errors' => $errors
+    ]);
 } else {
     $db->query("INSERT INTO users (email, name, password) VALUES (:email, :name, :password)", [
         'email' => $_POST['email'],
         'name' => $_POST['name'],
-        'password' => $_POST['password']
+        'password' => password_hash($_POST['password'], PASSWORD_BCRYPT)
     ]);
 
-    $_SESSION['user'] = [
-        'email' => $_POST['email'],
-        'name' => $_POST['name']
-    ];
-
-    header('location: /');
+    header('location: /login');
     exit();
 }

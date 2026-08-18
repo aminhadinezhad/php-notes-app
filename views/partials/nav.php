@@ -52,7 +52,10 @@
                             </el-menu>
                         </el-dropdown>
                     <?php else : ?>
-                        <a href="/register" class="text-white">Register</a>
+                        <a href="/login" class="<?= urlIs('/login') || urlIs('/register')
+                                                    ? 'rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white'
+                                                    :  'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white';
+                                                ?>">Login / Register</a>
                     <?php endif; ?>
                 </div>
             </div>
@@ -107,7 +110,10 @@
                         </svg>
                     </button>
                 <?php else : ?>
-                    <a href="/register" class="text-white ml-3">Register</a>
+                    <a href="/login" class="<?= urlIs('/login') || urlIs('/register')
+                                                ? 'block rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white'
+                                                :  'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white';
+                                            ?>">Login / Register</a>
                 <?php endif; ?>
             </div>
             <div class="mt-3 space-y-1">
