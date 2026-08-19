@@ -48,7 +48,12 @@
                             <el-menu anchor="bottom end" popover class="w-48 origin-top-right rounded-md bg-gray-800 py-1 outline-1 -outline-offset-1 outline-white/10 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden">Your profile</a>
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden">Settings</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden">Sign out</a>
+                                <form action="/session" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE" />
+                                    <button type="submit" class="block w-full px-4 py-2 text-left text-sm text-gray-300 focus:bg-white/5 focus:outline-hidden bg-transparent border-0 cursor-pointer">
+                                        Sign Out
+                                    </button>
+                                </form>
                             </el-menu>
                         </el-dropdown>
                     <?php else : ?>
@@ -109,18 +114,24 @@
                             <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </button>
+                    <div class="mt-3 space-y-1">
+                        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white">Your profile</a>
+                        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white">Settings</a>
+                        <form action="/session" method="POST">
+                            <input type="hidden" name="_method" value="DELETE" />
+                            <button type="submit" class="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white bg-transparent border-0 cursor-pointer">
+                                Sign Out
+                            </button>
+                        </form>
+                    </div>
                 <?php else : ?>
                     <a href="/login" class="<?= urlIs('/login') || urlIs('/register')
-                                                ? 'block rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white'
-                                                :  'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white';
+                                                ? 'block  w-full rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white'
+                                                :  'block  w-full rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white';
                                             ?>">Login / Register</a>
                 <?php endif; ?>
             </div>
-            <div class="mt-3 space-y-1">
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white">Your profile</a>
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white">Settings</a>
-                <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white">Sign out</a>
-            </div>
+
         </div>
     </el-disclosure>
 </nav>
