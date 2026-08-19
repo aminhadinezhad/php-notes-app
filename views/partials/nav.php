@@ -16,10 +16,12 @@
                                                     ? 'rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white'
                                                     :  'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white';
                                                 ?>">About</a>
-                        <a href="/notes" class="<?= (urlIs('/notes') || urlIs('/note') || urlIs('/notes/create') || urlIs('/note/edit'))
-                                                    ? 'rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white'
-                                                    :  'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white';
-                                                ?>">Notes</a>
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <a href="/notes" class="<?= (urlIs('/notes') || urlIs('/note') || urlIs('/notes/create') || urlIs('/note/edit'))
+                                                        ? 'rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white'
+                                                        :  'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white';
+                                                    ?>">Notes</a>
+                        <?php endif; ?>
                         <a href="/contact" class="<?= urlIs('/contact')
                                                         ? 'rounded-md bg-gray-950/50 px-3 py-2 text-sm font-medium text-white'
                                                         :  'rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white';
@@ -91,10 +93,12 @@
                                         ? 'block rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white'
                                         :  'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white';
                                     ?>">About</a>
-            <a href="/notes" class="<?= (urlIs('/notes') || urlIs('/note') || urlIs('/notes/create'))
-                                        ? 'block rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white'
-                                        :  'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white';
-                                    ?>">Notes</a>
+            <?php if (isset($_SESSION['user'])): ?>
+                <a href="/notes" class="<?= (urlIs('/notes') || urlIs('/note') || urlIs('/notes/create'))
+                                            ? 'block rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white'
+                                            :  'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white';
+                                        ?>">Notes</a>
+            <?php endif; ?>
             <a href="/contact" class="<?= urlIs('/contact')
                                             ? 'block rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white'
                                             :  'block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white';
@@ -114,16 +118,6 @@
                             <path d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </button>
-                    <div class="mt-3 space-y-1">
-                        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white">Your profile</a>
-                        <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white">Settings</a>
-                        <form action="/session" method="POST">
-                            <input type="hidden" name="_method" value="DELETE" />
-                            <button type="submit" class="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white bg-transparent border-0 cursor-pointer">
-                                Sign Out
-                            </button>
-                        </form>
-                    </div>
                 <?php else : ?>
                     <a href="/login" class="<?= urlIs('/login') || urlIs('/register')
                                                 ? 'block  w-full rounded-md bg-gray-950/50 px-3 py-2 text-base font-medium text-white'
@@ -131,6 +125,18 @@
                                             ?>">Login / Register</a>
                 <?php endif; ?>
             </div>
+            <?php if (isset($_SESSION['user'])): ?>
+                <div class="mt-3 space-y-1">
+                    <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white">Your profile</a>
+                    <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white">Settings</a>
+                    <form action="/session" method="POST">
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <button type="submit" class="block w-full text-left rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-white/5 hover:text-white bg-transparent border-0 cursor-pointer">
+                            Sign Out
+                        </button>
+                    </form>
+                </div>
+            <?php endif; ?>
 
         </div>
     </el-disclosure>
