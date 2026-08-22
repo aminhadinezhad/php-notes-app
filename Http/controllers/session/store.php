@@ -1,53 +1,24 @@
 <?php
 
-use Core\Validator;
-use Core\App;
-use Core\Database;
+use Core\Authenticator;
+use Core\Session;
+use Http\Forms\LoginForm;
 
-$db = App::resolve(Database::class);
+$form = new LoginForm();
 
-$errors = [];
+$form->validate($_POST['email']);
 
-// NOTE: چون تو Validator.php تابع string رو به شکل static تعریف کردم
-if (! Validator::email($_POST['email'])) {
-    $errors['email'] = 'Please provide a valid email address.';
+$auth = new Authenticator();
+
+if ($auth->attempt($_POST['email'], $_POST['password'])) {
+    redirect('/');
 }
 
-if (! Validator::string($_POST['password'])) {
-    $errors['password'] = 'Please provide a valid password.';
-}
+$form->error('email', 'No matching account found for that email address and password');
 
-if (! empty($errors)) {
-    return view("session/create.view.php", [
-        'errors' => $errors
-    ]);
-}
-
-$user = $db->query("SELECT * FROM users WHERE email = :email", [
+Session::flash('errors', $form->errors());
+Session::flash('old', [
     'email' => $_POST['email']
-])->find();
-
-if (! $user) {
-    return view("session/create.view.php", [
-        'errors' => [
-            'email' => 'No matching found for that email address'
-        ]
-    ]);
-}
-
-if (password_verify($_POST['password'], $user['password'])) {
-    login([
-        'email' => $user['email'],
-        'name' => $user['name'],
-        'id' => $user['id']
-    ]);
-
-    header('location: /');
-    exit();
-}
-
-return view("session/create.view.php", [
-    'errors' => [
-        'password' => 'No matching found for that password'
-    ]
 ]);
+
+return redirect('/login');

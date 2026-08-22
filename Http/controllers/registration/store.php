@@ -13,16 +13,6 @@ if (! Validator::email($_POST['email'])) {
     $errors['email'] = 'Please provide a valid email address.';
 }
 
-if (! Validator::password($_POST['password'], 7, 255)) {
-    $errors['password'] = 'Please provide a password of at least seven characters.';
-}
-
-if (! empty($errors)) {
-    return view("registration/create.view.php", [
-        'errors' => $errors
-    ]);
-}
-
 $user = $db->query("SELECT * FROM users WHERE email = :email", [
     'email' => $_POST['email']
 ])->find();
@@ -30,6 +20,16 @@ $user = $db->query("SELECT * FROM users WHERE email = :email", [
 if ($user) {
     $errors['email'] = 'There is a user with that email address!';
 
+    return view("registration/create.view.php", [
+        'errors' => $errors
+    ]);
+}
+
+if (Validator::string($_POST['password'], 1, 5)) {
+    $errors['password'] = 'Please provide a password of at least five characters.';
+}
+
+if (! empty($errors)) {
     return view("registration/create.view.php", [
         'errors' => $errors
     ]);

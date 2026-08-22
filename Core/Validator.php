@@ -16,9 +16,4 @@ class Validator
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
-
-    public static function password($value, $min, $max)
-    {
-        return strlen($value) >= $min && strlen($value) <= $max;
-    }
 }

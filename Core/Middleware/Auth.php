@@ -1,14 +1,14 @@
 <?php
 
-// namespace Core\Middleware;
+namespace Core\Middleware;
 
-// class Auth
-// {
-//     public static function handle()
-//     {
-//         if (! isset($_SESSION['user'])) {
-//             header('location: /login');
-//             exit();
-//         }
-//     }
-// }
+class Auth
+{
+    public static function handle()
+    {
+        if (! isset($_SESSION['user'])) {
+            header('location: /login');
+            exit();
+        }
+    }
+}
