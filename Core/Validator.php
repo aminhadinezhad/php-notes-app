@@ -12,7 +12,7 @@ class Validator
     }
 
     // NOTE: فرمت ایمیل رو چک میکنه
-    public static function email($value)
+    public static function email(string $value): bool
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
